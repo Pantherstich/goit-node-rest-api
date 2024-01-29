@@ -1,13 +1,11 @@
-import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { app } from "./app.js";
+import mongoose from "mongoose";
 
 dotenv.config();
 
-const DB_HOST =
-  process.env.DB_HOST ||
-  "mongodb+srv://pantherstich:Mongo1232112321@cluster0.gfnn8zw.mongodb.net/contacts_reader?retryWrites=true&w=majority";
-const PORT = process.env.PORT || 3000;
+const { DB_HOST, PORT = 3000 } = process.env;
+mongoose.set("strictQuery", true);
 
 mongoose
   .connect(DB_HOST)

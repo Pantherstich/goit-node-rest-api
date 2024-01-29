@@ -7,10 +7,12 @@ import {
   updateContact,
   updateFavoriteContact,
 } from "../controllers/contactsControllers.js";
+import validateBody from "../helpers/validateBody.js";
+
 import checkId from "../helpers/checkId.js";
 import {
   createContactSchema,
-  favoriteContactSchema,
+  updateFavoriteSchema,
   updateContactSchema,
 } from "../schemas/contactsSchemas.js";
 
@@ -29,7 +31,7 @@ contactsRouter.put("/:id", validateBody(updateContactSchema), updateContact);
 
 contactsRouter.patch(
   "/:id/favorite",
-  validateBody(favoriteContactSchema),
+  validateBody(updateFavoriteSchema),
   updateFavoriteContact
 );
 

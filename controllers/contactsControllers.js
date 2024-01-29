@@ -3,15 +3,19 @@ import {
   getContactByIdService,
   removeContactService,
   addContactService,
-  updateContactService,
+  changeContactService,
   updateStatusContactService,
 } from "../services/contactsServices.js";
 import HttpError from "../helpers/HttpError.js";
 import checkId from "../helpers/checkId.js";
 
-export const getAllContacts = async (req, res) => {
-  const allContacts = await listContactsService();
-  res.status(200).json(allContacts);
+export const getAllContacts = async (req, res, next) => {
+  try {
+    const allContacts = await listContactsService();
+    res.status(200).json(allContacts);
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const getOneContact = async (req, res, next) => {
@@ -60,7 +64,7 @@ export const updateContact = async (req, res, next) => {
     if (Object.keys(updates).length === 0)
       throw HttpError(400, "Body must have at least one field");
 
-    const result = await updateContactService(id, updates);
+    const result = await changeContactService(id, updates);
     if (!result) throw HttpError(404, "Not found");
 
     res.status(200).json(result);

@@ -2,7 +2,9 @@
 
 import mongoose, { Schema } from "mongoose";
 
-const contact = new Schema(
+// import mongoose, { Schema } from "mongoose";
+
+const contactSchema = new Schema(
   {
     name: {
       type: String,
@@ -19,9 +21,9 @@ const contact = new Schema(
       default: false,
     },
   },
-  { versionKey: false }
+  { versionKey: false, timestamps: true }
 );
 
-const Contact = mongoose.model("contact", contact);
+const Contact = mongoose.model("contact", contactSchema);
 
 export default Contact;
