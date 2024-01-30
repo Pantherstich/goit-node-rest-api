@@ -1,10 +1,14 @@
+import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { app } from "./app.js";
-import mongoose from "mongoose";
 
 dotenv.config();
 
-const { DB_HOST, PORT = 3000 } = process.env;
+const DB_HOST =
+  process.env.DB_HOST ||
+  "mongodb+srv://Igor:Mongo1232112321@cluster0.gfnn8zw.mongodb.net/";
+const PORT = process.env.PORT || 3000;
+
 mongoose.set("strictQuery", true);
 
 mongoose

@@ -1,8 +1,4 @@
-// import Contact from "../db/contacts";
-
 import Contact from "../db/contacts.js";
-
-// const contactsPath = path.resolve("db/contacts.json");
 
 export const listContactsService = async () => {
   const contacts = await Contact.find();
