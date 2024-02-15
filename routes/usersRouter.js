@@ -1,9 +1,10 @@
 import express from "express";
-import validateBody from "../helpers/validateBody.js";
 import {
   changeSubscriptionSchema,
   createUserSchema,
 } from "../schemas/usersSchemas.js";
+import authentication from "../helpers/autentification.js";
+import validateBody from "../helpers/validateBody.js";
 import {
   changeAvatar,
   changeSubscription,
@@ -12,7 +13,6 @@ import {
   refresh,
   register,
 } from "../controllers/userControllers.js";
-import authentication from "../helpers/autentification.js";
 
 import uploader from "../helpers/uploader.js";
 
