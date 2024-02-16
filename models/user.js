@@ -4,7 +4,7 @@ const user = new Schema(
   {
     password: {
       type: String,
-      required: [true, "Set password for user"],
+      required: [true, "Password is required"],
     },
     email: {
       type: String,
@@ -17,6 +17,7 @@ const user = new Schema(
       default: "starter",
     },
     token: String,
+    avatarURL: String,
   },
   { versionKey: false, timestamps: true }
 );
