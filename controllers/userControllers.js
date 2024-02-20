@@ -37,7 +37,7 @@ export const register = async (req, res, next) => {
       to: [email],
       subject: "Verify your email",
       html: `<h1>Click link below</h1><br/>
-        <a target="blank" href="${BASE_URL}/users/verify/:${verificationToken}" style="color:blue; font-size: 28px">Click to verify email</a>
+        <a target="blank" href="${BASE_URL}/users/verify/${verificationToken}" style="color:blue; font-size: 28px">Click to verify email</a>
         `,
     };
 
@@ -59,7 +59,9 @@ export const login = async (req, res, next) => {
     const { password, email } = req.body;
 
     const userEnter = await User.findOne({ email });
+
     if (!userEnter) throw HttpError(401, "Email or password is wrong");
+    if (!userEnter.verify) throw HttpError(401, "Email isn't verified");
 
     const passwordCompare = await bcrypt.compare(password, userEnter.password);
 
@@ -169,7 +171,7 @@ export const resendVerify = async (req, res, next) => {
     const verificationEmail = {
       to: [email],
       subject: "Verify your email",
-      html: `<a target="_blank" href="${BASE_URL}/users/verify/:${user.verificationToken}">Click to verify email</a>`,
+      html: `<a target="_blank" href="${BASE_URL}/users/verify/${user.verificationToken}">Click to verify email</a>`,
     };
 
     await sendEmail(verificationEmail);
